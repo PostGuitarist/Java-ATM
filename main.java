@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {  
+class Main {  
 
   private static double balance = 0.00;
 
