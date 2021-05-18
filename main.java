@@ -1,47 +1,58 @@
 import java.util.Scanner;
 
-class Main {  
+public class Main {  
 
-  private double balance = 0.00;
+  private static double balance = 0.00;
 
-  public double checkBal(){
-    return balance;
+  public static void checkBal(){
+    System.out.println(balance);
   }
 
-  public double depoSit(double x){
+  public static void depoSit(double x){
     balance += x;
-    return "New balance: " + balance;
+    System.out.println("New balance: " + balance);
   }
 
-  public double withDraw(double y){
+  public static void withDraw(double y){
     balance -= y;
-    return "New balance: " + balance;
+    System.out.println("New balance: " + balance);
   }
   
   public static void main(String args[]) { 
     Scanner scan = new Scanner(System.in);
 
-    System.out.println("Welcome to a Java-based ATM!");
-    System.out.println("Please input what you would like to do.");
-    System.out.println("1 - Check Balance   2 - Deposit   3 - Withdraw");  
-    int selection = scan.nextInt();
+    boolean running = true;
     
-    if(selection == 1){
-      checkBal();
-    }
-    else if(selection == 2){
-      System.out.println("Please input how much to deposit.");
-      double dep = scan.nextDouble;
-      depoSit(dep);
-    }
-    else if(selection == 3){
-      System.out.println("Please input how much to withdraw");
-      double withd = scan.nextDouble;
-      withDraw(withd);
-    }
-    else{
-      System.out.println("Not a valid answer.");
-    }
-      
+    System.out.println("Welcome to a Java-based ATM!");
+    while(running){
+      System.out.println("Please input what you would like to do.");
+      System.out.println("1 - Check Balance   2 - Deposit   3 - Withdraw   4 - Quit");  
+      int selection = scan.nextInt();
+    
+      if(selection == 1){
+        checkBal();
+      }
+      else if(selection == 2){
+        System.out.println("Please input how much to deposit.");
+        double dep = scan.nextDouble();
+        depoSit(dep);
+      }
+      else if(selection == 3){
+        System.out.println("Please input how much to withdraw");
+        double withd = scan.nextDouble();
+        if(withd > balance){
+          System.out.println("Not enough funds available.");
+        }
+        else{
+          withDraw(withd);
+        }
+      }
+      else if(selection == 4){
+        running = false;
+      }  
+      else{
+        System.out.println("Not a valid answer.");
+      }
+    }  
   }
 }
